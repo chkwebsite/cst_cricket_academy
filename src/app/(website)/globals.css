@@ -47,3 +47,12 @@ a {
     color-scheme: dark;
   }
 }
+.slick-prev:before, .slick-next:before {
+    opacity: .75;
+    color: #162e25 !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: slick;
+    font-size: 24px !important;
+    line-height: 1;
+}
