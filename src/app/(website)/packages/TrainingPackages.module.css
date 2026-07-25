@@ -1,0 +1,225 @@
+.feeSection {
+    padding: 96px 24px;
+    background: #0f1f16;
+    color: #f0ecdd;
+}
+
+.inner {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: rgba(240, 236, 221, 0.55);
+    margin-bottom: 28px;
+}
+
+.breadcrumbSep {
+    opacity: 0.5;
+}
+
+.breadcrumbCurrent {
+    color: #c9a667;
+}
+
+.headline {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 40px;
+}
+
+.narrative {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(240, 236, 221, 0.12);
+    margin-bottom: 48px;
+}
+
+.narrativeLabel {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #b23a2e;
+    font-weight: 600;
+}
+
+.copy p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: rgba(240, 236, 221, 0.82);
+    margin-bottom: 16px;
+}
+
+.copy p:last-child {
+    margin-bottom: 0;
+}
+
+.residencyToggle {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    background: rgba(240, 236, 221, 0.06);
+    border-radius: 999px;
+    margin-bottom: 32px;
+}
+
+.residencyTab {
+    border: none;
+    background: transparent;
+    color: rgba(240, 236, 221, 0.6);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.residencyTab:hover {
+    color: #f0ecdd;
+}
+
+.residencyTabActive {
+    background: #b23a2e;
+    color: #f0ecdd;
+}
+
+.planList {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(240, 236, 221, 0.12);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 56px;
+}
+
+.planCard {
+    display: flex;
+    gap: 20px;
+    padding: 28px;
+    background: #16321f;
+}
+
+.planIndex {
+    font-family: ui-monospace, "SFMono-Regular", monospace;
+    font-size: 13px;
+    color: #c9a667;
+    padding-top: 4px;
+    min-width: 24px;
+}
+
+.planBody {
+    flex: 1;
+}
+
+.planHeader {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.planName {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.planFee {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.feeValue {
+    font-size: 22px;
+    font-weight: 700;
+    color: #b23a2e;
+}
+
+.feeUnit {
+    font-size: 12px;
+    color: rgba(240, 236, 221, 0.5);
+}
+
+.planDuration {
+    font-size: 13px;
+    color: #c9a667;
+    margin-bottom: 8px;
+}
+
+.planIncludes {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(240, 236, 221, 0.75);
+}
+
+.checklistBlock {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-top: 1px solid rgba(240, 236, 221, 0.12);
+    border-bottom: 1px solid rgba(240, 236, 221, 0.12);
+    margin-bottom: 48px;
+}
+
+.checklist {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(240, 236, 221, 0.8);
+}
+
+.checklist strong {
+    color: #f0ecdd;
+}
+
+.contactBlock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+}
+
+.contactLabel {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(240, 236, 221, 0.5);
+    margin-bottom: 6px;
+}
+
+.contactValue a {
+    color: #f0ecdd;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.contactValue a:hover {
+    color: #c9a667;
+}
+
+@media (max-width: 640px) {
+    .narrative,
+    .checklistBlock {
+        grid-template-columns: 1fr;
+    }
+
+    .planCard {
+        padding: 20px;
+    }
+}

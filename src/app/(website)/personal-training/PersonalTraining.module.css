@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.programSection {
+  --pitch-green: #16342a;
+  --pitch-green-light: #2c5941;
+  --ivory: #f6f1e4;
+  --maroon: #7a2334;
+  --gold: #c9a24b;
+  --charcoal: #22201b;
+
+  background: var(--ivory);
+  color: var(--charcoal);
+  padding: 88px 0 96px;
+}
+
+.inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Hero ---------- */
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--maroon);
+}
+
+.headline {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+}
+
+.tagline {
+  font-family: "Inter", sans-serif;
+  font-size: 1.1rem;
+  color: var(--pitch-green-light);
+  margin: 0 0 40px;
+  max-width: 52ch;
+}
+
+/* ---------- Quick facts chip row ---------- */
+.quickFacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 64px;
+}
+
+.chip {
+  background: var(--pitch-green);
+  color: var(--ivory);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 10px 16px;
+  border-radius: 999px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.chip strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ---------- Narrative: asymmetric label + copy ---------- */
+.narrative {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+.narrativeLabel {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  padding-top: 4px;
+}
+
+.copy p {
+  font-family: "Inter", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--charcoal);
+  margin: 0 0 24px;
+}
+
+.copy p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Highlights / Benefits: block layout ---------- */
+.block {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+.highlightGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.highlightGrid li {
+  font-family: "Inter", sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--charcoal);
+  padding-left: 22px;
+  position: relative;
+}
+
+.highlightGrid li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+/* ---------- Benefits: single-column check list ---------- */
+.benefitsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.benefitsList li {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--charcoal);
+  padding-left: 30px;
+  position: relative;
+}
+
+.benefitsList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--maroon);
+  border-radius: 50%;
+}
+
+.benefitsList li::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+/* ---------- Suitable for: badge list ---------- */
+.suitableList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.suitableList li {
+  font-family: "Inter", sans-serif;
+  font-size: 0.92rem;
+  color: var(--pitch-green);
+  border: 1px solid rgba(122, 35, 52, 0.3);
+  border-radius: 6px;
+  padding: 8px 14px;
+  background: #fffdf8;
+}
+
+/* ---------- Goal: pull quote ---------- */
+.goal {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.55;
+  color: var(--pitch-green);
+  border-left: 3px solid var(--gold);
+  padding-left: 20px;
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .programSection {
+    padding: 64px 0 72px;
+  }
+  .narrative,
+  .block {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .highlightGrid {
+    grid-template-columns: 1fr;
+  }
+}

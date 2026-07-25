@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.aboutSection {
+  --pitch-green: #16342a;
+  --pitch-green-light: #2c5941;
+  --ivory: #f6f1e4;
+  --maroon: #7a2334;
+  --gold: #c9a24b;
+  --charcoal: #22201b;
+
+  background: var(--ivory);
+  color: var(--charcoal);
+  padding: 88px 0 96px;
+}
+
+.inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Hero ---------- */
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--maroon);
+}
+
+.headline {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 36px;
+  max-width: 14ch;
+}
+
+/* ---------- Scoreboard stat strip (signature element) ---------- */
+.scoreboard {
+  background: var(--pitch-green);
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 64px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -20px rgba(22, 52, 42, 0.55);
+}
+
+.stat {
+  padding: 26px 20px;
+  border-right: 1px solid rgba(201, 162, 75, 0.25);
+  text-align: left;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.statNumber {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ivory);
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+/* ---------- Narrative: asymmetric label + copy ---------- */
+.narrative {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+}
+
+.narrativeLabel {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  padding-top: 4px;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.copy p {
+  font-family: "Inter", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--charcoal);
+  margin: 0 0 28px;
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid rgba(122, 35, 52, 0.18);
+  margin: 4px 0 28px;
+}
+
+.closing {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: var(--pitch-green);
+  border-left: 3px solid var(--gold);
+  padding-left: 20px;
+  margin: 8px 0 0;
+}
+
+@media (max-width: 720px) {
+  .aboutSection {
+    padding: 64px 0 72px;
+  }
+  .scoreboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stat:nth-child(2) {
+    border-right: none;
+  }
+  .stat:nth-child(3),
+  .stat:nth-child(4) {
+    border-top: 1px solid rgba(201, 162, 75, 0.25);
+  }
+  .narrative {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
