@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import pool from "@/components/lib/db";
 
 // ==============================
@@ -324,3 +324,4 @@ export async function DELETE(request, { params }) {
         connection.release();
     }
 }
+

@@ -1,4 +1,4 @@
-import pool from "@/components/lib/db";
+﻿import pool from "@/components/lib/db";
 import { NextResponse } from "next/server";
 
 function getPaymentStatus(totalAmount, paidAmount) {
@@ -242,3 +242,4 @@ export async function DELETE(request, { params }) {
     }
 
 }
+
