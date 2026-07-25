@@ -1,4 +1,4 @@
-import pool from "@/components/lib/db";
+﻿import pool from "@/components/lib/db";
 import { NextResponse } from "next/server";
 
 const normalizePaymentStatus = (status) => {
@@ -248,3 +248,4 @@ export async function DELETE(request, { params }) {
     }
 
 }
+
