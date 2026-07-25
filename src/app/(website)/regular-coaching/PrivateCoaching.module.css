@@ -1,0 +1,256 @@
+/*
+  Shares the token system with RegularCoaching.module.css:
+    --pitch-deep #16302A --pitch-mid #2E5C46 --grass #4C8B5A
+    --chalk #F6F4EC --chalk-card #FFFFFF --leather #B4552F
+  Signature: seam-stitch divider under the headline (same as Regular Coaching)
+  plus a numbered plan-card layout (01/02/03) — appropriate here because the
+  plans genuinely form an ascending sequence: single session → 12 → 24.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap');
+
+.feeSection {
+    background: #F6F4EC;
+    color: #16302A;
+    padding: 56px 24px 88px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.inner {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #6B7268;
+    margin-bottom: 18px;
+}
+
+.breadcrumbSep {
+    color: #B7BBAA;
+}
+
+.breadcrumbCurrent {
+    color: #2E5C46;
+    font-weight: 600;
+}
+
+.headline {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4.2vw, 2.9rem);
+    line-height: 1.1;
+    margin: 0 0 20px;
+    color: #16302A;
+    position: relative;
+}
+
+.headline::after {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 10px;
+    margin-top: 18px;
+    background-image: repeating-linear-gradient(
+        100deg,
+        #B4552F 0px,
+        #B4552F 2px,
+        transparent 2px,
+        transparent 10px
+    );
+    background-size: 100% 2px;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.85;
+}
+
+.narrative {
+    margin-bottom: 40px;
+}
+
+.narrativeLabel {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #B4552F;
+    margin-bottom: 14px;
+}
+
+.copy p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #2B342E;
+    margin: 0 0 16px;
+    max-width: 64ch;
+}
+
+.copy p:last-child {
+    margin-bottom: 0;
+}
+
+.residencyToggle {
+    display: inline-flex;
+    gap: 4px;
+    background: #EAE8DA;
+    padding: 4px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+}
+
+.residencyTab {
+    border: none;
+    background: transparent;
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4B5750;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.residencyTab:hover {
+    color: #16302A;
+}
+
+.residencyTabActive {
+    background: #16302A;
+    color: #F6F4EC;
+}
+
+.planList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 44px;
+}
+
+.planCard {
+    background: #FFFFFF;
+    border: 1px solid #E3E2D3;
+    border-radius: 4px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+.planIndex {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #4C8B5A;
+    letter-spacing: 0.05em;
+    padding-top: 4px;
+}
+
+.planBody {
+    flex: 1;
+    min-width: 0;
+}
+
+.planHeader {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.planName {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: #16302A;
+    margin: 0;
+}
+
+.planFee {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.feeValue {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #B4552F;
+    font-variant-numeric: tabular-nums;
+}
+
+.feeUnit {
+    font-size: 12px;
+    color: #6B7268;
+}
+
+.planDuration {
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #4C8B5A;
+    margin: 0 0 8px;
+}
+
+.planIncludes {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: #3A473F;
+    margin: 0;
+}
+
+.contactBlock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding-top: 24px;
+    border-top: 1px dashed #C9CBB8;
+}
+
+.contactLabel {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6B7268;
+    margin-bottom: 6px;
+}
+
+.contactValue {
+    margin: 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.contactValue a {
+    color: #16302A;
+    text-decoration: none;
+}
+
+.contactValue a:hover {
+    color: #B4552F;
+}
+
+@media (max-width: 560px) {
+    .feeSection {
+        padding: 44px 18px 64px;
+    }
+
+    .planCard {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .planHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
