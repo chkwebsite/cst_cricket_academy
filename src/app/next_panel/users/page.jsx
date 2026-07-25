@@ -91,7 +91,7 @@ export default function UsersPage() {
                                                             <ArrowUpRight size={16} />
                                                         </Link>
 
-                                                        {userinfo.permissions.includes("users.edit") && <Link href={`/next_panel/users/${user.id}/edit`} className="btn btn-outline-secondary">
+                                                        {userinfo.permissions.includes("users.edit") && <Link href={`/next_panel/users/${user.id}/update`} className="btn btn-outline-secondary">
                                                             <Edit size={16} />
                                                         </Link>}
                                                     </div>

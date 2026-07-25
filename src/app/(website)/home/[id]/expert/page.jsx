@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -338,4 +338,3 @@ const Page = () => {
 };
 
 export default Page;
-

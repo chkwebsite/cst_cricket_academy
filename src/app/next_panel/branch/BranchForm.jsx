@@ -10,6 +10,7 @@ const emptyBranch = {
     city: "",
     state: "",
     pincode: "",
+    map_link: "",
     latitude: "",
     longitude: "",
     status: 1,
@@ -30,6 +31,7 @@ export function normalizeBranchPayload(values) {
         city: values.city.trim(),
         state: values.state.trim(),
         pincode: values.pincode.trim(),
+        map_link: values.map_link,
         latitude: values.latitude === "" ? null : values.latitude,
         longitude: values.longitude === "" ? null : values.longitude,
         status: Number(values.status),
@@ -102,6 +104,10 @@ export default function BranchForm({ formId, values, onChange, onSubmit, error, 
                 <div className="col-md-4">
                     <label className="form-label">Pincode</label>
                     <input className="form-control" value={values.pincode} onChange={handleChange("pincode")} disabled={loading} />
+                </div>
+                <div className="col-md-12">
+                    <label className="form-label">Map link</label>
+                    <textarea className="form-control" value={values.map_link} onChange={handleChange("map_link")} disabled={loading}></textarea>
                 </div>
 
                 <div className="col-md-4">

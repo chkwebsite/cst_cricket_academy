@@ -40,6 +40,12 @@ export default function EditCoFounderPage() {
         setPreview(nextValues.profile_image instanceof File ? URL.createObjectURL(nextValues.profile_image) : null);
     };
 
+    useEffect(() => {
+        return () => {
+            if (preview) URL.revokeObjectURL(preview);
+        };
+    }, [preview]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setSaving(true);

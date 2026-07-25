@@ -7,6 +7,7 @@ import Footer from "@/components/website/Footer";
 import styles from "@/components/website/WebsiteShell.module.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { AuthProvider } from "@/components/utils/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +29,11 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <BootstrapClient />
-        <Header />
-        <main className={styles.pageMain}>{children}</main>
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <main className={styles.pageMain}>{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

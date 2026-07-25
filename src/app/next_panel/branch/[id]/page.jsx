@@ -17,6 +17,7 @@ const fields = [
     ["Pincode", "pincode"],
     ["Latitude", "latitude"],
     ["Longitude", "longitude"],
+    ["Map Link", "map_link"],
 ];
 
 export default function BranchDetailPage() {

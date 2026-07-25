@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Save } from "lucide-react";
 
-export default function EditUserPage() {
+export default function page() {
     const [roles, setRoles] = useState([]);
     const [branch, setBranch] = useState([]);
     const [values, setValues] = useState({
@@ -29,14 +29,16 @@ export default function EditUserPage() {
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(null);
     const router = useRouter();
-    const params = useParams();
+    // const params = useParams();
+    const { id } = useParams();
+
     useEffect(() => {
         async function loadData() {
             try {
                 const [rolesRes, branchRes, userRes] = await Promise.all([
                     fetch("/api/roles"),
                     fetch("/api/branch"),
-                    fetch(`/api/users/${params.id}`),
+                    fetch(`/api/users/${id}`),
                 ]);
 
                 const rolesJson = await rolesRes.json();
@@ -75,7 +77,7 @@ export default function EditUserPage() {
         }
 
         loadData();
-    }, [params.id]);
+    }, [id]);
 
     const handleChange = (key) => (e) => {
         const value = key === "role_id" || key === "status" ? Number(e.target.value) : e.target.value;
@@ -88,14 +90,14 @@ export default function EditUserPage() {
         setError(null);
 
         try {
-            const res = await fetch(`/api/users/${params.id}`, {
+            const res = await fetch(`/api/users/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(values),
             });
             const json = await res.json();
             if (!res.ok) throw new Error(json.message || "Unable to update user.");
-            router.push(`/next_panel/users/${params.id}`);
+            router.push(`/next_panel/users/${id}`);
         } catch (err) {
             setError(err.message);
         } finally {

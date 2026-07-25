@@ -31,6 +31,7 @@ export default function EditBranchPage() {
                     city: branch.city || "",
                     state: branch.state || "",
                     pincode: branch.pincode || "",
+                    map_link: branch.map_link || "",
                     latitude: branch.latitude ?? "",
                     longitude: branch.longitude ?? "",
                     status: branch.status ?? 1,

@@ -70,24 +70,10 @@ export default function PanelShell({ children }) {
                 const res = await fetch(url);
                 const json = await res.json();
                 if (!res.ok) throw new Error(json.message || "Unable to load menus.");
-                const items = json.data || [];
 
-                const map = {};
-                items.forEach((it) => {
-                    map[it.id] = { ...it, children: [] };
-                });
+                const items = Array.isArray(json.data) ? json.data : [];
 
-                const roots = [];
-                items.forEach((it) => {
-                    if (it.parent_id) {
-                        if (map[it.parent_id]) map[it.parent_id].children.push(map[it.id]);
-                        else roots.push(map[it.id]);
-                    } else {
-                        roots.push(map[it.id]);
-                    }
-                });
-
-                const filterTree = (nodes) =>
+                const filterTree = (nodes = []) =>
                     nodes
                         .map((n) => {
                             const children = filterTree(n.children || []);
@@ -100,7 +86,7 @@ export default function PanelShell({ children }) {
                             return n.children.length > 0 || !n.menu_url;
                         });
 
-                setMenuTree(filterTree(roots));
+                setMenuTree(filterTree(items));
             } catch (err) {
                 console.error("Load menus failed", err);
             } finally {
@@ -139,7 +125,7 @@ export default function PanelShell({ children }) {
 
         const pathNorm = normalize(pathname);
 
-        const candidates = ["/next_panel/branch", "/next_panel/co-founders", "/next_panel/profile", "/next_panel/coaching_program"];
+        const candidates = ["/next_panel/academy-fees", "/next_panel/enroll-player-programs", "/next_panel/fee-payments", "/next_panel/fees-attendance", "/next_panel/coaching_program", "/next_panel/gallery"];
         allUrls.forEach((u) => {
             const nu = normalize(u);
             if (!nu) return;
@@ -176,6 +162,23 @@ export default function PanelShell({ children }) {
             .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
             .join("");
         return Icons[pascal] || Menu;
+    };
+
+    const resolveMenuHref = (menuUrl) => {
+        if (!menuUrl) return "#";
+
+        const raw = String(menuUrl).trim();
+        if (!raw) return "#";
+
+        if (/^(https?:|mailto:)/i.test(raw)) return raw;
+
+        const normalized = raw.startsWith("/") ? raw : `/${raw}`;
+
+        if (normalized.startsWith("/next_panel")) {
+            return normalized;
+        }
+
+        return `/next_panel${normalized}`;
     };
 
     return (
@@ -247,13 +250,15 @@ export default function PanelShell({ children }) {
                                     <div className="collapse" id={`menu-${item.id}`}>
                                         <div className="list-group list-group-flush ps-4">
                                             {item.children.map((c) => (
-                                                <a key={c.id} href={c.menu_url || "#"} className="list-group-item list-group-item-action">{c.menu_name}</a>
+                                                <a key={c.id} href={resolveMenuHref(c.menu_url)} className="list-group-item list-group-item-action">
+                                                    {c.menu_name}
+                                                </a>
                                             ))}
                                         </div>
                                     </div>
                                 </div>
                             ) : (
-                                <a key={item.id} href={item.menu_url || "#"} className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
+                                <a key={item.id} href={resolveMenuHref(item.menu_url)} className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
                                     {(() => { const Comp = getIconComponent(item.menu_icon); return <Comp size={18} /> })()}
                                     <span className="sidebar-label">{item.menu_name}</span>
                                 </a>
@@ -262,31 +267,38 @@ export default function PanelShell({ children }) {
                     )}
 
                     <hr />
-                    {/* <div className="mt-2">
-                        <Link href="/next_panel/branch" className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
+                    <div className="mt-2">
+                        <Link href="/next_panel/gallery" className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
                             <Building2 size={18} />
-                            <span className="sidebar-label">Branches</span>
+                            <span className="sidebar-label">Gallery</span>
                         </Link>
-                    </div> */}
+                    </div>
 
                     {/* <div className="mt-2">
-                        <Link href="/next_panel/co-founders" className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
+                        <Link href="/next_panel/enroll-player-programs" className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
                             <UserRoundCheck size={18} />
-                            <span className="sidebar-label">Co-Founders</span>
+                            <span className="sidebar-label">Enroll player</span>
                         </Link>
                     </div> */}
 
                     {/* <div className="mt-2">
-                        <Link href="/next_panel/coaching_program" className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
+                        <Link href="/next_panel/academy-fees" className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
                             <UserRoundCheck size={18} />
-                            <span className="sidebar-label">Coaching Program</span>
+                            <span className="sidebar-label">Academy fees</span>
                         </Link>
                     </div> */}
 
                     {/* <div className="mt-2">
-                        <Link href="/next_panel/profile" className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
+                        <Link href="/next_panel/fee-payments" className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
                             <IdCard size={18} />
-                            <span className="sidebar-label">Profiles</span>
+                            <span className="sidebar-label">Fee payments</span>
+                        </Link>
+                    </div> */}
+
+                    {/* <div className="mt-2">
+                        <Link href="/next_panel/fees-attendance" className="nav-link d-flex align-items-center gap-3 py-2 px-3 rounded-3 mb-2">
+                            <IdCard size={18} />
+                            <span className="sidebar-label">Fees attendance</span>
                         </Link>
                     </div> */}
 
@@ -325,7 +337,7 @@ export default function PanelShell({ children }) {
                         </button>
                         <div className="collapse" id="reportsMenu">
                             <div className="list-group list-group-flush ps-4">
-                                <a href="#" className="list-group-item list-group-item-action">Attendance</a>
+                                <a href="/next_panel/fees-attendance" className="list-group-item list-group-item-action">Fees Attendance</a>
                                 <a href="#" className="list-group-item list-group-item-action">Progress</a>
                                 <a href="#" className="list-group-item list-group-item-action">Invoices</a>
                             </div>
@@ -389,7 +401,7 @@ export default function PanelShell({ children }) {
                     </div>
                 </header>
 
-                <main className="panel-content flex-grow-1 p-4 bg-light">
+                <main className="panel-content flex-grow-1 py-4 bg-light">
                     {authorized === false ? (
                         <div className="d-flex align-items-center justify-content-center h-100">
                             <div className="text-center">

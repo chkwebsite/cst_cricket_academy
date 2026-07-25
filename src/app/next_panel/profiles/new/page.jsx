@@ -1,37 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Save } from "lucide-react";
-import TeamForm, { getEmptyTeam, buildTeamFormData, teamToFormValues, getTeamLogoUrl } from "../../TeamForm";
+import { ArrowLeft, Plus } from "lucide-react";
+import ProfileForm, { getEmptyProfile, normalizeProfilePayload } from "../ProfileForm";
 
-export default function EditTeamPage() {
-    const [values, setValues] = useState(getEmptyTeam());
-    const [logoFile, setLogoFile] = useState(null);
-    const [currentLogoUrl, setCurrentLogoUrl] = useState(null);
+export default function NewProfilePage() {
+    const [values, setValues] = useState(getEmptyProfile());
+    const [users, setUsers] = useState([]);
     const [branches, setBranches] = useState([]);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(null);
-    const params = useParams();
     const router = useRouter();
 
     useEffect(() => {
-        async function loadData() {
+        async function loadFormData() {
             try {
-                const [teamRes, branchesRes] = await Promise.all([
-                    fetch(`/api/teams/${params.id}`),
+                const [usersRes, branchesRes] = await Promise.all([
+                    fetch("/api/users"),
                     fetch("/api/branch"),
                 ]);
-                const teamJson = await teamRes.json();
+                const usersJson = await usersRes.json();
                 const branchesJson = await branchesRes.json();
 
-                if (!teamRes.ok) throw new Error(teamJson.message || "Unable to load team.");
+                if (!usersRes.ok) throw new Error(usersJson.message || "Unable to load users.");
                 if (!branchesRes.ok) throw new Error(branchesJson.message || "Unable to load branches.");
 
-                setValues(teamToFormValues(teamJson.data));
-                setCurrentLogoUrl(getTeamLogoUrl(teamJson.data));
+                setUsers(usersJson.data || []);
                 setBranches(branchesJson.data || []);
             } catch (err) {
                 setError(err.message);
@@ -40,8 +37,8 @@ export default function EditTeamPage() {
             }
         }
 
-        loadData();
-    }, [params.id]);
+        loadFormData();
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -49,13 +46,14 @@ export default function EditTeamPage() {
         setError(null);
 
         try {
-            const res = await fetch(`/api/teams/${params.id}`, {
-                method: "PUT",
-                body: buildTeamFormData(values, logoFile),
+            const res = await fetch("/api/profile", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(normalizeProfilePayload(values)),
             });
             const json = await res.json();
-            if (!res.ok) throw new Error(json.message || "Unable to update team.");
-            router.push(`/next_panel/teams/${params.id}`);
+            if (!res.ok) throw new Error(json.message || "Unable to create profile.");
+            router.push("/next_panel/profiles");
         } catch (err) {
             setError(err.message);
         } finally {
@@ -70,14 +68,14 @@ export default function EditTeamPage() {
                     <div className="bg-white rounded-4 shadow-sm p-4 mb-4">
                         <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
                             <div>
-                                <Link href="/next_panel/teams" className="btn btn-sm btn-outline-secondary mb-3">
-                                    <ArrowLeft size={16} className="me-2" /> Back to Teams
+                                <Link href="/next_panel/profiles" className="btn btn-sm btn-outline-secondary mb-3">
+                                    <ArrowLeft size={16} className="me-2" /> Back to Profiles
                                 </Link>
-                                <h1 className="h4 mb-2">Edit Team</h1>
-                                <p className="text-muted mb-0">Update team details, coach, and logo.</p>
+                                <h1 className="h4 mb-2">Create Profile</h1>
+                                <p className="text-muted mb-0">Add a public profile for an academy user.</p>
                             </div>
-                            <button className="btn btn-primary" type="submit" form="teamEditForm" disabled={saving || loading}>
-                                <Save size={16} className="me-2" /> {saving ? "Saving..." : "Save Changes"}
+                            <button className="btn btn-primary" type="submit" form="profileForm" disabled={saving || loading}>
+                                <Plus size={16} className="me-2" /> {saving ? "Saving..." : "Save Profile"}
                             </button>
                         </div>
                     </div>
@@ -86,15 +84,14 @@ export default function EditTeamPage() {
                 <div className="col-12">
                     <div className="bg-white rounded-4 shadow-sm p-4">
                         {loading ? (
-                            <div className="text-center py-5 text-muted">Loading team details...</div>
+                            <div className="text-center py-5 text-muted">Loading form data...</div>
                         ) : (
-                            <TeamForm
-                                formId="teamEditForm"
+                            <ProfileForm
+                                formId="profileForm"
                                 values={values}
+                                users={users}
                                 branches={branches}
-                                currentLogoUrl={currentLogoUrl}
                                 onChange={setValues}
-                                onLogoChange={setLogoFile}
                                 onSubmit={handleSubmit}
                                 error={error}
                                 loading={saving}

@@ -9,6 +9,11 @@ import { useAuth } from "@/components/utils/AuthContext";
 
 export default function CoFoundersPage() {
     const { user } = useAuth();
+    const permissions = Array.isArray(user?.permissions) ? user.permissions : [];
+    const hasPermission = (permission) => {
+        if (Number(user?.role_id) === 1 || Number(user?.role_id) === 7) return true;
+        return permissions.includes(permission);
+    };
     const [coFounders, setCoFounders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [deletingId, setDeletingId] = useState(null);
@@ -62,7 +67,7 @@ export default function CoFoundersPage() {
                                 </div>
                                 <p className="text-muted mb-0">Manage leadership profiles shown across the academy.</p>
                             </div>
-                            {user.permissions.includes("co_founders.create") &&
+                            {hasPermission("co_founders.create") &&
                                 <Link href="/next_panel/co-founders/new" className="btn btn-primary fw-semibold">
                                     <Plus size={16} className="me-2" /> New Co-Founder
                                 </Link>
@@ -115,27 +120,48 @@ export default function CoFoundersPage() {
                                                 <td className="text-muted">{coFounder.experience || "Not provided"}</td>
                                                 <td>{coFounder.display_order ?? 0}</td>
                                                 <td>
-                                                    <span className={`badge ${coFounder.status === 1 ? "bg-success" : "bg-secondary"}`}>
-                                                        {coFounder.status === 1 ? "Active" : "Inactive"}
+                                                    <span className={`badge ${Number(coFounder.status) === 1 ? "bg-success" : "bg-secondary"}`}>
+                                                        {Number(coFounder.status) === 1 ? "Active" : "Inactive"}
                                                     </span>
                                                 </td>
                                                 <td className="text-end">
                                                     <div className="btn-group btn-group-sm" role="group">
-                                                        <Link href={`/next_panel/co-founders/${coFounder.id}`} className="btn btn-outline-primary" aria-label="View co-founder">
-                                                            <ArrowUpRight size={16} />
-                                                        </Link>
-                                                        {user.permissions.includes("co_founders.edit") && <Link href={`/next_panel/co-founders/${coFounder.id}/edit`} className="btn btn-outline-secondary" aria-label="Edit co-founder">
-                                                            <Edit size={16} />
-                                                        </Link>}
-                                                        {user.permissions.includes("co_founders.delete") && <button
-                                                            type="button"
-                                                            className="btn btn-outline-danger"
-                                                            onClick={() => handleDelete(coFounder)}
-                                                            disabled={deletingId === coFounder.id}
-                                                            aria-label="Delete co-founder"
-                                                        >
-                                                            <Trash2 size={16} />
-                                                        </button>}
+
+                                                        {/* View */}
+                                                        {hasPermission("co_founders.view") && (
+                                                            <Link
+                                                                href={`/next_panel/co-founders/${coFounder.id}/details`}
+                                                                className="btn btn-outline-primary"
+                                                                aria-label="View co-founder"
+                                                            >
+                                                                <ArrowUpRight size={16} />
+                                                                {/* ya <Eye size={16} /> */}
+                                                            </Link>
+                                                        )}
+
+                                                        {/* Edit */}
+                                                        {hasPermission("co_founders.edit") && (
+                                                            <Link
+                                                                href={`/next_panel/co-founders/${coFounder.id}/edit`}
+                                                                className="btn btn-outline-secondary"
+                                                                aria-label="Edit co-founder"
+                                                            >
+                                                                <Edit size={16} />
+                                                            </Link>
+                                                        )}
+
+                                                        {/* Delete */}
+                                                        {hasPermission("co_founders.delete") && (
+                                                            <button
+                                                                type="button"
+                                                                className="btn btn-outline-danger"
+                                                                onClick={() => handleDelete(coFounder)}
+                                                                disabled={deletingId === coFounder.id}
+                                                                aria-label="Delete co-founder"
+                                                            >
+                                                                <Trash2 size={16} />
+                                                            </button>
+                                                        )}
                                                     </div>
                                                 </td>
                                             </tr>

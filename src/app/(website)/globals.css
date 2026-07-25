@@ -56,3 +56,68 @@ a {
     font-size: 24px !important;
     line-height: 1;
 }
+
+.co_founder_img{
+    height: 90%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    width: 90%;
+}
+.theme_color {
+    color: #009688;
+}
+.theme_bg {
+    background-color: #009688;
+}
+.cd {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.cd:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.cd .card-img-top {
+    transition: transform 0.5s ease;
+}
+
+.cd:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+.profile_img{
+    object-fit: cover;
+    object-position: center top;
+    color: #0000;
+    outline-offset: 10px;
+    border: 0 solid #009688;
+    border-radius: 50%;
+    outline: 10px solid #0096884d;
+    width: 160px !important;
+    height: 160px !important;
+    top: 45px !important;
+    left: 50% !important;
+    transform: translate(-50%);
+    transition: 0.3s;
+}
+.extra {
+    transition: 0.3s;
+}
+.extra:hover {
+    color: #009688;
+    transition: 0.3s;
+    box-shadow: 0px 0px 20px 0px #dfc77c !important;
+}
+.extra:hover .profile_img{
+   outline: 10px solid #009688;
+    transition: 0.3s;
+}
+@media (max-width:768px) {
+  .order-last {
+    order: 0 !important;
+}
+}

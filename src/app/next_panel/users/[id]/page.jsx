@@ -57,7 +57,7 @@ export default function UserDetailPage() {
                             </div>
                             <div className="d-flex gap-2">
                                 {userInfo.permissions.includes("users.edit") &&
-                                    <Link href={`/next_panel/users/${params.id}/edit`} className="btn btn-primary">
+                                    <Link href={`/next_panel/users/${params.id}/update`} className="btn btn-primary">
                                         <Edit size={16} className="me-2" /> Edit
                                     </Link>}
                                 {userInfo.permissions.includes("users.delete") && <button className="btn btn-outline-danger" onClick={handleDelete}>
